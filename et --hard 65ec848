@@ -1,0 +1,140 @@
+* [33m64b28b9[m[33m ([m[1;36mHEAD[m[33m, [m[1;31morigin/main[m[33m)[m Update page.js
+* [33m012f6d9[m Update page.js
+* [33m4ecce13[m Update auth.middleware.js
+* [33m4fae9a0[m Update validators.js
+* [33mec35f14[m Update server.js
+* [33ma87124b[m Update auth.routes.js
+* [33mf0cca54[m Update auth.routes.js
+* [33m0dd52de[m Update auth.middleware.js
+* [33mc7d1bbe[m Update validators.js
+* [33m65ec848[m Update User.js
+* [33m793953c[m Update auth.controller.js
+* [33mc4456d0[m REGISTRO
+* [33m5c5722f[m Update page.js
+* [33m3887aca[m Update page.js
+* [33mb97ff71[m Update package.json
+* [33mc15707e[m Update page.js
+* [33mbfa57b8[m Update layout.js
+* [33mf257d32[m Create providers.jsx
+* [33m7433723[m Update package.json
+* [33m75d3c1f[m Update auth.controller.js
+* [33m4bc700a[m Update auth.routes.js
+* [33m5cb916e[m Update auth.routes.js
+* [33ma29882d[m Update User.js
+* [33m977f85d[m Update head.js
+* [33m84d63b7[m Update ContentsquareTag.jsx
+* [33ma15dadd[m Update ContentsquareTag.jsx
+* [33m02a234b[m Delete pry_lapape/src/components/ClarityTag.jsx
+* [33mb1eca1a[m Update layout.js
+* [33m7f39f92[m Update ContentsquareTag.jsx
+* [33ma0e0cc8[m Update layout.js
+* [33m2a848cc[m Update layout.js
+* [33mb74c9bb[m Create ClarityTag.jsx
+* [33m1e7426b[m Create head.js
+* [33ma33f346[m Update layout.js
+* [33m183ca0b[m MODIFICACION LAYOUT
+* [33m5bd572e[m Use ContentsquareTag in layout
+* [33md278af9[m Update layout.js
+* [33m06921b2[m Create ContentsquareTag.jsx
+* [33mb8c678d[m Update layout.js
+* [33mb4de749[m Update layout.js
+* [33maec6ccc[m Update layout.js
+* [33mdf8f096[m Update server.js
+* [33mf357173[m Update RoleLayout.jsx
+* [33m86cff76[m Update page.jsx
+* [33mcb0010a[m Update page.jsx
+* [33m437abce[m Update page.jsx
+* [33m71336b0[m Update page.jsx
+* [33m7c91032[m Update email.service.js
+* [33mfcf57b2[m Update validators.js
+* [33m7a5bcd4[m Update auth.controller.js
+* [33m79106d5[m Update auth.routes.js
+* [33ma6d12c3[m Update User.js
+* [33mea4a439[m Update page.js
+* [33m82794ac[m Update page.jsx
+* [33md8a7750[m Update page.jsx
+* [33mc118bdb[m Update page.jsx
+* [33mbb1c39b[m Update page.jsx
+* [33m2e8b820[m Update page.jsx
+* [33m1b32bef[m Update page.jsx
+*   [33m114b276[m Merge pull request #12 from eduardohgo/codex/add-user-option-for-login-method
+[32m|[m[33m\[m  
+[32m|[m * [33m66ed191[m Restrict cart link to public and client roles
+[32m|[m[32m/[m  
+* [33mcafc6e8[m Update email.service.js
+* [33mac302f3[m Update package-lock.json
+* [33mbb80b24[m Update package.json
+* [33me8a8328[m Update email.service.js
+* [33me6b8270[m Update server.js
+* [33m43ad3cd[m Delete la-pape-backend/.env
+* [33m985a187[m Update server.js
+* [33mb35fe0e[m Update package.json
+*   [33md15d022[m Merge pull request #11 from eduardohgo/codex/update-dashboard-for-client-role-px3mv7
+[34m|[m[35m\[m  
+[34m|[m *   [33m86a7b1a[m Merge branch 'main' into codex/update-dashboard-for-client-role-px3mv7
+[34m|[m [36m|[m[34m\[m  
+[34m|[m [36m|[m[34m/[m  
+[34m|[m[34m/[m[36m|[m   
+* [36m|[m   [33mf88242d[m Merge pull request #9 from eduardohgo/codex/update-dashboard-for-client-role-ifcyr8
+[1;32m|[m[1;33m\[m [36m\[m  
+[1;32m|[m * [36m\[m   [33m6882a02[m Merge branch 'main' into codex/update-dashboard-for-client-role-ifcyr8
+[1;32m|[m [1;34m|[m[1;32m\[m [36m\[m  
+[1;32m|[m [1;34m|[m[1;32m/[m [36m/[m  
+[1;32m|[m[1;32m/[m[1;34m|[m [36m|[m   
+* [1;34m|[m [36m|[m [33m89d98fd[m Update server.js
+* [1;34m|[m [36m|[m   [33m209f86b[m Merge pull request #8 from eduardohgo/codex/update-dashboard-for-client-role-kylfvj
+[1;36m|[m[31m\[m [1;34m\[m [36m\[m  
+[1;36m|[m * [1;34m\[m [36m\[m   [33m4fbadd9[m Merge branch 'main' into codex/update-dashboard-for-client-role-kylfvj
+[1;36m|[m [32m|[m[1;36m\[m [1;34m\[m [36m\[m  
+[1;36m|[m [32m|[m[1;36m/[m [1;34m/[m [36m/[m  
+[1;36m|[m[1;36m/[m[32m|[m [1;34m|[m [36m|[m   
+* [32m|[m [1;34m|[m [36m|[m   [33m2d2e4f3[m Merge pull request #7 from eduardohgo/codex/update-dashboard-for-client-role-2ddmix
+[34m|[m[35m\[m [32m\[m [1;34m\[m [36m\[m  
+[34m|[m * [32m\[m [1;34m\[m [36m\[m   [33m9998e49[m Merge branch 'main' into codex/update-dashboard-for-client-role-2ddmix
+[34m|[m [36m|[m[34m\[m [32m\[m [1;34m\[m [36m\[m  
+[34m|[m [36m|[m[34m/[m [32m/[m [1;34m/[m [36m/[m  
+[34m|[m[34m/[m[36m|[m [32m|[m [1;34m|[m [36m|[m   
+* [36m|[m [32m|[m [1;34m|[m [36m|[m   [33m74b2678[m Merge pull request #6 from eduardohgo/codex/update-dashboard-for-client-role-xqt4fe
+[1;32m|[m[1;33m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m  
+[1;32m|[m * [36m\[m [32m\[m [1;34m\[m [36m\[m   [33m8c0ff94[m Merge branch 'main' into codex/update-dashboard-for-client-role-xqt4fe
+[1;32m|[m [1;34m|[m[1;32m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m  
+[1;32m|[m [1;34m|[m[1;32m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m  
+[1;32m|[m[1;32m/[m[1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m   
+* [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m   [33m3480c65[m Merge pull request #5 from eduardohgo/codex/update-dashboard-for-client-role-rxv5d6
+[1;36m|[m[31m\[m [1;34m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m  
+[1;36m|[m * [1;34m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m   [33m4233c38[m Merge branch 'main' into codex/update-dashboard-for-client-role-rxv5d6
+[1;36m|[m [32m|[m[1;36m\[m [1;34m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m  
+[1;36m|[m [32m|[m[1;36m/[m [1;34m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m  
+[1;36m|[m[1;36m/[m[32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m   
+* [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m519f4b5[m Update server.js
+* [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m9f58152[m Update server.js
+* [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m07482db[m Delete pry_lapape/.env
+* [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m28c666c[m Create .env
+* [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m   [33m88edce6[m Merge pull request #4 from eduardohgo/codex/update-dashboard-for-client-role-h6qdsi
+[34m|[m[35m\[m [32m\[m [1;34m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m  
+[34m|[m * [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m5680eb3[m Fix build by removing remote fonts and adding Suspense wrappers
+* [35m|[m [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m927eb01[m para desplegar
+* [35m|[m [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m   [33m264cee7[m Merge pull request #3 from eduardohgo/codex/update-dashboard-for-client-role-la0b44
+[36m|[m[1;31m\[m [35m\[m [32m\[m [1;34m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m  
+[36m|[m * [35m|[m [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m2c2f2c0[m Use header component on config page
+[36m|[m [35m|[m[35m/[m [32m/[m [1;34m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m  
+* [35m|[m [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m   [33m2a1b7c9[m Merge pull request #2 from eduardohgo/codex/update-dashboard-for-client-role-rbu6qz
+[1;32m|[m[1;33m\[m [35m\[m [32m\[m [1;34m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m  
+[1;32m|[m * [35m|[m [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m2de3da4[m Read user from session storage fallback
+[1;32m|[m [35m|[m[35m/[m [32m/[m [1;34m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m  
+* [35m|[m [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m   [33m397e828[m Merge pull request #1 from eduardohgo/codex/update-dashboard-for-client-role
+[35m|[m[1;35m\[m [35m\[m [32m\[m [1;34m\[m [36m\[m [32m\[m [1;34m\[m [36m\[m  
+[35m|[m [1;35m|[m[35m/[m [32m/[m [1;34m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m  
+[35m|[m[35m/[m[1;35m|[m [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m   
+[35m|[m * [32m|[m [1;34m|[m [36m|[m [32m|[m [1;34m|[m [36m|[m [33m749648a[m Enhance header for authenticated dashboards
+[35m|[m[35m/[m [32m/[m [1;34m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m  
+[35m|[m * [1;34m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m [33m76e0ce8[m Allow configurable CORS origins for deployed frontend
+[35m|[m[35m/[m [1;34m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m  
+[35m|[m * [36m/[m [32m/[m [1;34m/[m [36m/[m [33m8ac4161[m Add keep-alive option to reduce cold starts
+[35m|[m[35m/[m [36m/[m [32m/[m [1;34m/[m [36m/[m  
+[35m|[m * [32m/[m [1;34m/[m [36m/[m [33m518646b[m Refactor server bootstrap flow
+[35m|[m[35m/[m [32m/[m [1;34m/[m [36m/[m  
+[35m|[m * [1;34m/[m [36m/[m [33m4f24dfd[m Harden backend bootstrap for Render deployment
+[35m|[m[35m/[m [1;34m/[m [36m/[m  
+[35m|[m * [36m/[m [33m11abb05[m Simplify backend startup to avoid Render syntax error
+[35m|[m[35m/[m [36m/[m  

@@ -1,69 +1,35 @@
+// src/middlewares/auth.middleware.js
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import { compareToken } from "../services/token.service.js";
+import { hashToken } from "../services/token.service.js";
 
 export async function authenticate(req, res, next) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7).trim() : null;
+    const auth = req.headers.authorization || "";
+    const token = auth.startsWith("Bearer ") ? auth.slice(7) : null;
 
-    if (!token) {
-      return res.status(401).json({ error: "Token requerido" });
-    }
+    if (!token) return res.status(401).json({ error: "No autenticado" });
 
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(payload.id);
+    const userId = payload?.id || payload?.userId;
 
-    if (!user) {
-      return res.status(401).json({ error: "Token inválido" });
-    }
+    if (!userId) return res.status(401).json({ error: "Token inválido" });
 
-    const now = new Date();
-    const activeSessions = (user.sessions || []).filter(
-      (session) => session.expiresAt && session.expiresAt > now
-    );
-    const sessionsChanged = activeSessions.length !== (user.sessions || []).length;
-    user.sessions = activeSessions;
+    const user = await User.findByPk(userId);
+    if (!user) return res.status(401).json({ error: "Usuario no existe" });
 
-    let sessionIndex = -1;
-    for (let i = 0; i < user.sessions.length; i += 1) {
-      const session = user.sessions[i];
-      // eslint-disable-next-line no-await-in-loop
-      const matches = await compareToken(token, session.tokenHash);
-      if (matches) {
-        sessionIndex = i;
-        break;
-      }
-    }
+    const tokenHash = await hashToken(token);
+    const sessions = Array.isArray(user.sessions) ? user.sessions : [];
+    const sessionIndex = sessions.findIndex((s) => s?.tokenHash === tokenHash);
 
     if (sessionIndex === -1) {
-      if (sessionsChanged) {
-        await user.save();
-      }
-      return res.status(401).json({ error: "Sesión expirada o inválida" });
-    }
-
-    if (sessionsChanged) {
-      await user.save();
+      return res.status(401).json({ error: "Sesión no válida (token no registrado)" });
     }
 
     req.user = user;
-    req.auth = { token, payload, sessionIndex };
-    return next();
-  } catch (err) {
-    return res.status(401).json({ error: "Token inválido" });
+    req.auth = { sessionIndex, payload };
+    next();
+  } catch (_err) {
+    return res.status(401).json({ error: "Token inválido o expirado" });
   }
-}
-
-export function authorizeRoles(...roles) {
-  const normalized = roles.map((role) => role.toUpperCase());
-  return (req, res, next) => {
-    if (!req.user) {
-      return res.status(401).json({ error: "No autenticado" });
-    }
-    if (!normalized.includes(req.user.rol)) {
-      return res.status(403).json({ error: "No autorizado" });
-    }
-    return next();
-  };
 }

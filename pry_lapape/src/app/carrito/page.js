@@ -4,21 +4,25 @@ import Header from "@/components/Header";
 import CartTable from "@/components/CartTable";
 import { productos } from "@/lib/mock";
 import { PrimaryButton, SecondaryButton } from "@/components/Buttons";
-import { Home, ChevronRight, CheckCircle2, Shield, Truck, ArrowLeft } from "lucide-react";
+import { ChevronRight, CheckCircle2, Shield, Truck, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { cartGet, cartSet } from "@/lib/storage";
+import Breadcrumbs from "@/components/Breadcrumbs";
 
-export default function CarritoPage(){
+export default function CarritoPage() {
   const router = useRouter();
   const cuponRef = useRef(null);
 
   // Ítems demo por si el carrito está vacío (se siembran una sola vez)
-  const demoItems = useMemo(() => ([
-    { id: productos[0].id, title: productos[0].titulo, price: productos[0].precio, image: productos[0].image, sku: "SKU-001", qty: 1 },
-    { id: productos[1].id, title: productos[1].titulo, price: productos[1].precio, image: productos[1].image, sku: "SKU-002", qty: 2 },
-    { id: productos[2].id, title: productos[2].titulo, price: productos[2].precio, image: productos[2].image, sku: "SKU-003", qty: 1 },
-    { id: productos[3].id, title: productos[3].titulo, price: productos[3].precio, image: productos[3].image, sku: "SKU-004", qty: 1 },
-  ]), []);
+  const demoItems = useMemo(
+    () => [
+      { id: productos[0].id, title: productos[0].titulo, price: productos[0].precio, image: productos[0].image, sku: "SKU-001", qty: 1 },
+      { id: productos[1].id, title: productos[1].titulo, price: productos[1].precio, image: productos[1].image, sku: "SKU-002", qty: 2 },
+      { id: productos[2].id, title: productos[2].titulo, price: productos[2].precio, image: productos[2].image, sku: "SKU-003", qty: 1 },
+      { id: productos[3].id, title: productos[3].titulo, price: productos[3].precio, image: productos[3].image, sku: "SKU-004", qty: 1 },
+    ],
+    []
+  );
 
   // Estado del carrito (persistente)
   const [summary, setSummary] = useState({
@@ -46,7 +50,7 @@ export default function CarritoPage(){
         subtotal: stored.reduce((acc, it) => acc + (it.price || 0) * (it.qty || 1), 0),
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Cuando CartTable cambie cantidades/eliminaciones
@@ -56,14 +60,14 @@ export default function CarritoPage(){
   };
 
   // Moneda
-  const currency = v => `$ ${Number(v || 0).toFixed(2)}`;
+  const currency = (v) => `$ ${Number(v || 0).toFixed(2)}`;
 
   // Cupón: LAPAPE10 => 10% del subtotal (reemplaza el descuento fijo)
   const aplicarCupon = () => {
     const code = (cuponRef.current?.value || "").trim().toUpperCase();
     if (!code) return;
     if (code === "LAPAPE10") {
-      const descuento = Math.round(summary.subtotal * 0.10 * 100) / 100;
+      const descuento = Math.round(summary.subtotal * 0.1 * 100) / 100;
       setDiscount(descuento);
       alert("Cupón aplicado: 10% de descuento");
     } else {
@@ -83,23 +87,23 @@ export default function CarritoPage(){
 
   return (
     <>
-      <Header/>
-      
-      {/* Migas de pan */}
+      <Header />
+
+      {/* Migas de pan (Breadcrumbs) */}
       <section className="py-6 bg-gradient-to-r from-[#FFF9E6] to-[#FFFDEF]">
         <div className="max-w-6xl mx-auto px-6">
-          <nav className="flex items-center gap-2 text-sm text-[#666666]">
-            <Home size={16} className="text-[#4A90E2]" />
-            <ChevronRight size={14} />
-            <span className="text-[#1C1C1C] font-medium">Carrito de compras</span>
-          </nav>
+          <Breadcrumbs
+            items={[
+              { label: "Inicio", href: "/" },
+              { label: "Carrito de compras" },
+            ]}
+          />
         </div>
       </section>
 
       {/* Contenido principal */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-8">
-          
           {/* Sección del carrito - Ocupa 2 columnas */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
@@ -112,18 +116,12 @@ export default function CarritoPage(){
 
             {/* Tabla del carrito */}
             <div className="bg-white rounded-2xl shadow-lg border border-[#F0F0F0] overflow-hidden">
-              <CartTable
-                items={summary.items}
-                onTotalsChange={handleTotalsChange}
-              />
+              <CartTable items={summary.items} onTotalsChange={handleTotalsChange} />
             </div>
 
             {/* Acciones secundarias */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <SecondaryButton
-                onClick={() => router.push("/catalogo")}
-                className="flex items-center gap-3 px-6 py-3"
-              >
+              <SecondaryButton onClick={() => router.push("/catalogo")} className="flex items-center gap-3 px-6 py-3">
                 <ArrowLeft size={18} />
                 Continuar comprando
               </SecondaryButton>
@@ -143,9 +141,7 @@ export default function CarritoPage(){
                 <Truck className="text-[#2DC5A1]" size={20} />
                 <h3 className="font-semibold text-[#1C1C1C]">Envío gratis disponible</h3>
               </div>
-              <p className="text-[#666666] text-sm">
-                ¡Falta poco! Agrega más productos y obtén envío gratis (simulado).
-              </p>
+              <p className="text-[#666666] text-sm">¡Falta poco! Agrega más productos y obtén envío gratis (simulado).</p>
             </div>
           </div>
 
@@ -153,10 +149,8 @@ export default function CarritoPage(){
           <aside className="space-y-6">
             {/* Resumen */}
             <div className="rounded-2xl shadow-lg border border-[#F0F0F0] bg-white p-6 space-y-4 sticky top-6">
-              <h3 className="text-xl font-bold text-[#1C1C1C] border-b border-[#E0E0E0] pb-3">
-                Resumen del Pedido
-              </h3>
-              
+              <h3 className="text-xl font-bold text-[#1C1C1C] border-b border-[#E0E0E0] pb-3">Resumen del Pedido</h3>
+
               <div className="space-y-3">
                 <div className="flex justify-between text-[#333333]">
                   <span>Subtotal ({summary.items.length} productos)</span>
@@ -193,8 +187,10 @@ export default function CarritoPage(){
               </PrimaryButton>
 
               <p className="text-xs text-center text-[#666666]">
-                Al completar tu compra aceptas nuestros 
-                <a href="#" className="text-[#4A90E2] hover:underline ml-1">términos y condiciones</a>
+                Al completar tu compra aceptas nuestros
+                <a href="#" className="text-[#4A90E2] hover:underline ml-1">
+                  términos y condiciones
+                </a>
               </p>
             </div>
 
@@ -235,9 +231,9 @@ export default function CarritoPage(){
             <div className="p-4 rounded-2xl bg-gradient-to-r from-[#EC5DBB]/5 to-[#EC5DBB]/10 border border-[#EC5DBB]/20">
               <h4 className="font-semibold text-[#1C1C1C] text-sm mb-2">¿Tienes un cupón?</h4>
               <div className="flex gap-2">
-                <input 
+                <input
                   ref={cuponRef}
-                  type="text" 
+                  type="text"
                   placeholder="Código de descuento (LAPAPE10)"
                   className="
                     flex-1 px-3 py-2 rounded-lg border border-[#E0E0E0] text-sm

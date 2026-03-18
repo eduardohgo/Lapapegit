@@ -1,9 +1,18 @@
-import mongoose from "mongoose";
+import { Sequelize } from "sequelize";
+
+export const sequelize = new Sequelize(
+  process.env.PG_DATABASE,
+  process.env.PG_USER,
+  process.env.PG_PASSWORD,
+  {
+    host: process.env.PG_HOST,
+    port: Number(process.env.PG_PORT || 5432),
+    dialect: "postgres",
+    logging: false,
+  }
+);
 
 export async function connectDB() {
-  const uri = process.env.MONGO_URI;
-  if (!uri) throw new Error("MONGO_URI no definido en .env");
-  mongoose.set("strictQuery", true);
-  await mongoose.connect(uri, { dbName: "lapape" });
-  console.log("✅ MongoDB conectado");
+  await sequelize.authenticate();
+  console.log("✅ PostgreSQL conectado");
 }

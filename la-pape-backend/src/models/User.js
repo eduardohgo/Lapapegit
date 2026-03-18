@@ -1,55 +1,84 @@
 // src/models/User.js
-import mongoose, { Schema } from "mongoose";
+import { DataTypes, Model } from "sequelize";
+import { sequelize } from "../db.js";
 
-const sessionSchema = new Schema(
-  {
-    tokenHash: { type: String, required: true },
-    expiresAt: { type: Date, required: true },
-    userAgent: { type: String },
-    ipAddress: { type: String },
-    createdAt: { type: Date, default: Date.now },
-  },
-  { _id: false }
-);
+class User extends Model {
+  clearExpiredSessions(now = new Date()) {
+    const sessions = Array.isArray(this.sessions) ? this.sessions : [];
+    this.sessions = sessions.filter((s) => s?.expiresAt && new Date(s.expiresAt) > now);
+  }
+}
 
-const userSchema = new Schema(
+User.init(
   {
-    nombre: { type: String, required: true, trim: true },
-    email: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    passwordHash: { type: String, required: true },
+    id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
+
+    nombre: { type: DataTypes.STRING, allowNull: false },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      set(value) {
+        this.setDataValue("email", String(value || "").toLowerCase().trim());
+      },
+    },
+    passwordHash: { type: DataTypes.STRING, allowNull: false },
+
     rol: {
-      type: String,
-      enum: ["CLIENTE", "TRABAJADOR", "DUENO", "ADMIN"],
-      default: "CLIENTE",
+      type: DataTypes.ENUM("CLIENTE", "TRABAJADOR", "DUENO", "ADMIN"),
+      allowNull: false,
+      defaultValue: "CLIENTE",
     },
 
-    isVerified: { type: Boolean, default: false },
-    verifyCode: { type: String },
-    verifyCodeExpires: { type: Date },
+    // Login social
+    provider: { type: DataTypes.ENUM("LOCAL", "GOOGLE"), allowNull: false, defaultValue: "LOCAL" },
+    providerId: { type: DataTypes.STRING, allowNull: true },
+    avatarUrl: { type: DataTypes.STRING, allowNull: true },
 
-    twoFAEnabled: { type: Boolean, default: true },
-      loginMethod: {
-      type: String,
-      enum: ["PASSWORD_ONLY", "PASSWORD_2FA", "PASSWORD_SECRET"],
-      default: "PASSWORD_2FA",
+    // Verificación de cuenta
+    isVerified: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+    verifyCode: { type: DataTypes.STRING, allowNull: true },
+    verifyCodeExpires: { type: DataTypes.DATE, allowNull: true },
+
+    // Config login / 2FA
+    twoFAEnabled: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true },
+    loginMethod: {
+      type: DataTypes.ENUM("PASSWORD_ONLY", "PASSWORD_2FA", "PASSWORD_SECRET"),
+      allowNull: false,
+      defaultValue: "PASSWORD_2FA",
     },
-    secretQuestion: { type: String, trim: true },
-    secretAnswerHash: { type: String },
-    twoFAHash: { type: String },
-    twoFAExp: { type: Date },
+    secretQuestion: { type: DataTypes.STRING, allowNull: true },
+    secretAnswerHash: { type: DataTypes.STRING, allowNull: true },
 
-    resetOTPHash: { type: String },
-    resetOTPExp: { type: Date },
+    twoFAHash: { type: DataTypes.STRING, allowNull: true },
+    twoFAExp: { type: DataTypes.DATE, allowNull: true },
 
-    lastLoginAt: { type: Date },
-    sessions: { type: [sessionSchema], default: [] },
+    // Recuperación de contraseña
+    resetOTPHash: { type: DataTypes.STRING, allowNull: true },
+    resetOTPExp: { type: DataTypes.DATE, allowNull: true },
+
+    // Seguridad
+    resetAttempts: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+    resetLastAttemptAt: { type: DataTypes.DATE, allowNull: true },
+    resetBlockedUntil: { type: DataTypes.DATE, allowNull: true },
+
+    failedLoginAttempts: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+    lockUntil: { type: DataTypes.DATE, allowNull: true },
+
+    passwordChangesCount: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
+    passwordChangesDate: { type: DataTypes.DATE, allowNull: true },
+
+    // Sesiones (JSONB)
+    lastLoginAt: { type: DataTypes.DATE, allowNull: true },
+    sessions: { type: DataTypes.JSONB, allowNull: false, defaultValue: [] },
   },
-  { timestamps: true }
+  {
+    sequelize,
+    modelName: "User",
+    tableName: "users",
+    timestamps: true,
+    indexes: [{ unique: true, fields: ["email"] }],
+  }
 );
 
-userSchema.methods.clearExpiredSessions = function clearExpiredSessions(now = new Date()) {
-  if (!Array.isArray(this.sessions) || this.sessions.length === 0) return;
-  this.sessions = this.sessions.filter((session) => session.expiresAt && session.expiresAt > now);
-};
-
-export default mongoose.model("User", userSchema);
+export default User;
